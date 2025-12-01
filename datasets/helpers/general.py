@@ -53,9 +53,9 @@ def all_nodes_shortest_paths(graph: torch.Tensor):
     return distances
 
 
-def random_walk_probability_matrices(graph: torch.Tensor):
+def random_walk_probability_matrices(graph: torch.Tensor, z_dim : int):
     n_nodes, _ = graph.shape
-    probability_matrices = torch.zeros(n_nodes, n_nodes, n_nodes)
+    probability_matrices = torch.zeros(n_nodes, n_nodes, z_dim)
     row_sums = torch.sum(graph.clone(), dim = 1, keepdim=True)
     transition_probability_matrix = graph.clone() / row_sums
     probability_matrices[0, :, :] = transition_probability_matrix
